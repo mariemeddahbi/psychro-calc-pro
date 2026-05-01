@@ -1,0 +1,41 @@
+# Git
+.git
+.gitignore
+.github
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.egg-info
+.pytest_cache
+
+# Environnements virtuels
+venv
+env
+.venv
+ENV
+
+# IDE
+.vscode
+.idea
+*.swp
+
+# Docker
+Dockerfile
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs et docs
+*.log
+README.md
+Bib.txt
+
+# Tests (inutiles dans l'image de production)
+test_*.py
+tests/
