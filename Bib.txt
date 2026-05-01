@@ -1,0 +1,63 @@
+====================================================================
+PsychroCalc Pro — Références bibliographiques & dépendances
+====================================================================
+
+RÉFÉRENCES SCIENTIFIQUES
+─────────────────────────
+[1] ASHRAE Handbook – Fundamentals 2017, Chapitre 1 : Psychrométrie.
+    American Society of Heating, Refrigerating and Air-Conditioning
+    Engineers, Atlanta, GA.
+    Équations utilisées :
+      · (5)(6)    Pression de vapeur saturante (glace/eau liquide)
+      · (28)      Volume spécifique de l'air humide
+      · (32)      Enthalpie spécifique
+      · (35)(36)  Relation bulbe humide / teneur en eau
+
+[2] ASHRAE Standard 55-2020 : Thermal Environmental Conditions for
+    Human Occupancy. ASHRAE, Atlanta, GA.
+    → Zone de confort thermique tracée sur le diagramme.
+
+[3] Herrmann S., Kretzschmar H.-J., Gatley D.P. (2009).
+    "Thermodynamic Properties of Real Moist Air, Dry Air, Steam,
+    Water, and Ice."
+    HVAC&R Research, 15(5), 961–986.
+
+[4] Wexler A., Hyland R.W. (1983).
+    "Formulations for the Thermodynamic Properties of Dry Air from
+    173.15 to 473.15 K." ASHRAE Transactions, 89(2).
+
+BIBLIOTHÈQUES PYTHON
+────────────────────
+streamlit   >= 1.32.0   https://streamlit.io
+plotly      >= 5.18.0   https://plotly.com/python
+numpy       >= 1.26.0   https://numpy.org
+kaleido     >= 0.2.1    https://github.com/plotly/Kaleido
+                        (requis pour l'export PDF/PNG)
+
+INSTALLATION
+────────────
+  pip install streamlit plotly numpy kaleido
+
+LANCEMENT
+─────────
+  streamlit run app.py
+
+STRUCTURE DU PROJET
+────────────────────
+  app.py              Interface Streamlit principale (UI + orchestration)
+  chart.py            Constructeur de figure Plotly (fond + superpositions)
+  psychro_model.py    Équations psychrométriques (ASHRAE 2017)
+  Bib.txt             Ce fichier
+
+REMARQUES
+─────────
+• Toutes les équations utilisent les unités SI en interne (°C, Pa, kg/kg).
+• La teneur en eau W est stockée en kg/kg dans EtatPsychro ;
+  affichée en g/kg dans l'interface et sur le diagramme.
+• Le fond du diagramme est mis en cache (st.cache_data) en fonction
+  de la pression atmosphérique — il n'est recalculé que si la pression
+  change, rendant les recalculs quasi-instantanés.
+• L'anti-chevauchement des étiquettes utilise une grille de zones
+  d'exclusion 2D (_GrilleLabels dans chart.py) pour éviter que les
+  labels bh / h / HR / v se superposent près de la courbe de saturation.
+====================================================================
